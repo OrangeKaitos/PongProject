@@ -10,28 +10,16 @@ import org.newdawn.slick.SlickException;
  * 
  */
 public class Player extends MoveableObject {
-	private Field field;
 	/**
-	 * Creates a Player with a position, size and speed.
+	 * Creates a Player.
 	 * 
-	 * @param px
-	 *            The players positions x coordinate.
-	 * @param py
-	 *            The players positions y coordinate.
-	 * @param sx
-	 *            The players size in the x direction.
-	 * @param sy
-	 *            The players size in the y direction.
-	 * @param speed
-	 *            The players speed.
 	 * @throws SlickException 
 	 */
-	public Player(int px, int py, Field field) throws SlickException {
-		super(px, py);
+	public Player() throws SlickException {
+		super();
+		object = new Image("data/player.png");
 		sx = object.getWidth();
 		sy = object.getHeight();
-		object = new Image("data/player.png");
-		this.field = field;
 	}
 
 	/**
@@ -39,14 +27,11 @@ public class Player extends MoveableObject {
 	 */
 	@Override
 	public void move(String direction) {
-		if (direction.toLowerCase().equals("up")){
-			if (!(py <= 0)) {
-				py -= speed;
-			}
-		} else if (direction.toLowerCase().equals("down")){
-			if (!(py >= field.getSizeX())) { //kolla fields metoder!!!
-				py += speed;
-			}
+		if (direction.equals("up")){
+			py -= speed;
+		}
+		if (direction.equals("down")){
+			py += speed;
 		}
 	}
 }

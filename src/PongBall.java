@@ -4,12 +4,10 @@ import org.newdawn.slick.SlickException;
 public class PongBall extends MoveableObject {
 	private float speedX = 1f;
 	private float speedY = 1f;
-	private Field field;
 	
-	public PongBall(int px, int py, Field field) throws SlickException{
-		super(px, py);
+	public PongBall() throws SlickException{
+		super();
 		object = new Image("data/ball.png");
-		this.field = field;
 		sx = object.getWidth();
 		sy = object.getHeight();
 	}
@@ -21,6 +19,19 @@ public class PongBall extends MoveableObject {
 	public void move(String direction) {
 		px += speedX;
 		py += speedY;
+	}
+	
+	public void bounce(int paddleYPosition){
+		speedX += (float) (speed * Math.sin(Math.toRadians(paddleYPosition)));
+		speedY -= (float) (speed * Math.sin(Math.toRadians(paddleYPosition)));
+	}
+	
+	public void wallBounce(){
+		speedY = -speedY;
+	}
+	
+	public void playerBounce(){
+		speedX = -speedX;
 	}
 
 }

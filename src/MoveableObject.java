@@ -9,9 +9,9 @@ import org.newdawn.slick.*;
  * @version 2013-05-01
  */
 public abstract class MoveableObject {
-	protected int px, py; // the objects position
+	protected int px = 0, py = 0; // the objects position
 	protected int sx, sy; // the objects size
-	protected int speed = 1; // the speed of the object
+	protected float speed = 1f; // the speed of the object
 	protected Image object;
 
 	/**
@@ -23,8 +23,23 @@ public abstract class MoveableObject {
 	 *            The objects positions y coordinate.
 	 * @throws SlickException
 	 */
-	public MoveableObject(int px, int py){
-		setPosition(px, py);
+	public MoveableObject(){
+		
+	}
+
+	/**
+	 * @return The image of the object.
+	 */
+	public Image getObject() {
+		return object;
+	}
+
+	/**
+	 * Sets the image of the object.
+	 * @param object The new image.
+	 */
+	public void setObject(Image object) {
+		this.object = object;
 	}
 
 	/**
@@ -76,7 +91,7 @@ public abstract class MoveableObject {
 	/**
 	 * @return The speed of the object.
 	 */
-	public int getSpeed() {
+	public float getSpeed() {
 		return speed;
 	}
 
@@ -86,7 +101,7 @@ public abstract class MoveableObject {
 	 * @param speed
 	 *            The new speed.
 	 */
-	public void setSpeed(int speed) {
+	public void setSpeed(float speed) {
 		this.speed = speed;
 	}
 
