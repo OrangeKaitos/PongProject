@@ -1,4 +1,6 @@
 import org.newdawn.slick.*;
+//import org.newdawn.slick.state.BasicGameState;
+//import org.newdawn.slick.state.GameState;
 
 public class Main extends BasicGame {
 	private static int windowSizeX = 800;
@@ -27,6 +29,7 @@ public class Main extends BasicGame {
 		player2 = new AI(ball);
 		player2.setPosition(windowSizeX - 40 - player2.object.getWidth(),
 				windowSizeY / 2 - player1.object.getHeight() / 2);
+		gc.setShowFPS(false);
 		}
 
 	/**
@@ -52,7 +55,7 @@ public class Main extends BasicGame {
 		ball.object.draw(ball.getPositionX(), ball.getPositionY());
 		player1.object.draw(player1.getPositionX(), player1.getPositionY());
 		player2.object.draw(player2.getPositionX(), player2.getPositionY());
-		g.drawString("Player 1: " + player1.getLives() + " Player 2: " + player2.getLives(), 5, windowSizeY - 20);
+		g.drawString("Lives: Player 1: " + player1.getLives() + " Player 2: " + player2.getLives(), 5, windowSizeY - 20);
 		
 	}
 
@@ -88,7 +91,7 @@ public class Main extends BasicGame {
 	 * also makes the players lose lives.
 	 */
 	private void ballAction() {
-		if (ball.py <= 10 || ball.py + ball.object.getHeight() >= windowSizeY) {
+		if (ball.py <= 0 || ball.py + ball.object.getHeight() >= windowSizeY) {
 			ball.wallBounce();
 			ball.move(null);
 		} else if ((ball.px == player1.px + player1.object.getWidth() && (ball.py

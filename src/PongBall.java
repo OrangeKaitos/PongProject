@@ -21,11 +21,6 @@ public class PongBall extends MoveableObject {
 		py += speedY;
 	}
 	
-	public void bounce(int paddleYPosition){
-		speedX += (float) (speed * Math.sin(Math.toRadians(paddleYPosition)));
-		speedY -= (float) (speed * Math.sin(Math.toRadians(paddleYPosition)));
-	}
-	
 	public void wallBounce(){
 		speedY = -speedY;
 	}
