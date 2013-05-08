@@ -13,6 +13,7 @@ public abstract class MoveableObject {
 	protected int sx, sy; // the objects size
 	protected float speed = 1f; // the speed of the object
 	protected Image object;
+	protected int lives = 40;
 
 	/**
 	 * Creates a new MoveableObject and sets its position, size and speed.
@@ -112,5 +113,20 @@ public abstract class MoveableObject {
 	 */
 	public Image getImage() {
 		return object;
+	}
+	
+	/**
+	 * Decreases the life's by one.
+	 */
+	public boolean loseLife(){
+		lives--;
+		return lives == 0;
+	}
+	
+	/**
+	 * @return The number of lives the player has left.
+	 */
+	public int getLives(){
+		return lives;
 	}
 }

@@ -14,24 +14,29 @@ public class AI extends MoveableObject {
 	/**
 	 * Creates a computerized player and sets its initial position.
 	 * 
-	 * @param px The players positions x coordinate.
-	 * @param py The players positions y coordinate.
-	 * @param ball The pong games ball.
+	 * @param px
+	 *            The players positions x coordinate.
+	 * @param py
+	 *            The players positions y coordinate.
+	 * @param ball
+	 *            The pong games ball.
 	 * @throws SlickException
 	 */
-	public AI(int px, int py, PongBall ball) throws SlickException {
-		super(px, py);
+	public AI(PongBall ball) throws SlickException {
+		super();
+		object = new Image("data/player.png");
 		sx = object.getWidth();
 		sy = object.getHeight();
-		object = new Image("data/player.png");
 		this.ball = ball;
 	}
 
 	@Override
 	public void move(String direction) {
-		if (ball.getPositionY() < py){
+		if (ball.getPositionY() + ball.object.getHeight() / 2 < py
+				+ object.getHeight() / 2) {
 			py -= speed;
-		} else if (ball.getPositionY() > py){
+		} else if (ball.getPositionY() + ball.object.getHeight() / 2 > py
+				+ object.getHeight() / 2) {
 			py += speed;
 		}
 	}

@@ -10,6 +10,7 @@ import org.newdawn.slick.SlickException;
  * 
  */
 public class Player extends MoveableObject {
+	
 	/**
 	 * Creates a Player.
 	 * 
