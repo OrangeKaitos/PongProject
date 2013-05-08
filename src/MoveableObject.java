@@ -88,6 +88,8 @@ public abstract class MoveableObject {
 		this.px = px;
 		this.py = py;
 	}
+	
+
 
 	/**
 	 * @return The speed of the object.
