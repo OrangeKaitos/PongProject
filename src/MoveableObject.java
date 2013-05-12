@@ -13,7 +13,7 @@ public abstract class MoveableObject {
 	protected int sx, sy; // the objects size
 	protected float speed = 1f; // the speed of the object
 	protected Image object;
-	protected int lives = 40;
+	protected int lives = 50;
 
 	/**
 	 * Creates a new MoveableObject and sets its position, size and speed.
@@ -88,8 +88,6 @@ public abstract class MoveableObject {
 		this.px = px;
 		this.py = py;
 	}
-	
-
 
 	/**
 	 * @return The speed of the object.

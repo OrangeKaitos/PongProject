@@ -2,6 +2,13 @@ import org.newdawn.slick.*;
 //import org.newdawn.slick.state.BasicGameState;
 //import org.newdawn.slick.state.GameState;
 
+/**
+ * Class Main is the main class of the game Pong. It creates the different parts
+ * of the game and assembles them.
+ * 
+ * @author Philip Stiff
+ * 
+ */
 public class Main extends BasicGame {
 	private static int windowSizeX = 800;
 	private static int windowSizeY = 600;
@@ -26,11 +33,12 @@ public class Main extends BasicGame {
 		player1 = new Player();
 		player1.setPosition(40, windowSizeY / 2 - player1.object.getHeight()
 				/ 2);
-		player2 = new AI(ball);
+		player2 = new AI(ball, windowSizeY, windowSizeX);
+		//player2 = new Player();
 		player2.setPosition(windowSizeX - 40 - player2.object.getWidth(),
 				windowSizeY / 2 - player1.object.getHeight() / 2);
 		gc.setShowFPS(false);
-		}
+	}
 
 	/**
 	 * Updates the game screen. Moves the players and the ball.
@@ -55,8 +63,9 @@ public class Main extends BasicGame {
 		ball.object.draw(ball.getPositionX(), ball.getPositionY());
 		player1.object.draw(player1.getPositionX(), player1.getPositionY());
 		player2.object.draw(player2.getPositionX(), player2.getPositionY());
-		g.drawString("Lives: Player 1: " + player1.getLives() + " Player 2: " + player2.getLives(), 5, windowSizeY - 20);
-		
+		g.drawString("Lives: Player 1: " + player1.getLives() + " Player 2: "
+				+ player2.getLives(), 5, windowSizeY - 20);
+
 	}
 
 	/**
