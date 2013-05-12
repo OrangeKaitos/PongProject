@@ -106,12 +106,12 @@ public class Main extends BasicGame {
 		} else if ((ball.px == player1.px + player1.object.getWidth() && (ball.py
 				+ ball.object.getHeight() >= player1.py && ball.py <= player1.py
 				+ player1.object.getHeight()))) {
-			ball.playerBounce();
+			ball.playerBounce(player1);
 			ball.move(null);
 		} else if ((ball.px + ball.object.getWidth() == player2.px && (ball.py
 				+ ball.object.getHeight() >= player2.py && ball.py <= player2.py
 				+ player2.object.getHeight()))) {
-			ball.playerBounce();
+			ball.playerBounce(player2);
 			ball.move(null);
 		} else if (ball.px <= 0) {
 			player1.loseLife();
