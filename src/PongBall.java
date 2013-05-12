@@ -31,7 +31,7 @@ public class PongBall extends MoveableObject {
 		
 		    double ballLength = this.object.getHeight();
 		    double ballCenterY = this.py + ballLength/2;
-		    double paddleLength = player.object.getWidth();
+		    double paddleLength = player.object.getHeight();
 		    double paddleCenterY = player.getPositionY() + paddleLength/2;
 		    // This number decides the influence that the length between the
 		    // ball and the player has on the bounce of the ball in Y speed.
