@@ -1,5 +1,12 @@
 import java.io.*;
 import java.util.ArrayList;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+//import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
 
 /**
  * Class Highscore is a class used to read and write a highscore in a file.
@@ -7,11 +14,14 @@ import java.util.ArrayList;
  * @author Philip
  * 
  */
-public class Highscore {
-	private int listSize;
+public class HighscoreState extends BasicGameState{
+	private int listSize = 20;
+	int stateID = -1;
+	Image background = null;
+	ArrayList<String> score = null;
 	
-	public Highscore(int listSize){
-		this.listSize = listSize;
+	public HighscoreState(int stateID){
+		this.stateID = stateID;
 	}
 	
 	/**
@@ -89,5 +99,37 @@ public class Highscore {
 		} catch (IOException e) {
 			System.err.println("There was a problem writing to file.");
 		};
+	}
+
+	@Override
+	public void init(GameContainer gc, StateBasedGame sbg)
+			throws SlickException {
+		background = new Image("data/HighscoreBack.png");
+		
+	}
+
+	@Override
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
+			throws SlickException {
+		background.draw(0,0);
+		int posY = 55;
+		for(int i = 0; i < 10; i++){
+			g.drawString("\u001B37;1m" + score.get(i), 100, posY );
+			posY = posY + 10;
+		}
+		
+	}
+
+	@Override
+	public void update(GameContainer gc, StateBasedGame sbg, int g)
+			throws SlickException {
+		score = this.read();
+		
+		
+	}
+
+	@Override
+	public int getID() {
+		return stateID;
 	}
 }

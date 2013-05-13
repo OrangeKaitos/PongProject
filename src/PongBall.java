@@ -40,7 +40,7 @@ public class PongBall extends MoveableObject {
 	}
 	
 	public void playerBounce(MoveableObject player){
-			double middle = player.object.getHeight()/4;
+			double middle = player.object.getHeight()/6;
 		    double ballLength = this.object.getHeight();
 		    double ballCenterY = this.py + ballLength/2;
 		    double paddleLength = player.object.getHeight();
@@ -70,16 +70,11 @@ public class PongBall extends MoveableObject {
 		    	System.out.println("mitt");
 		    }
 		    	
-//		    	if(speedY >= 0.75*speedXY){
-//		    		System.out.println("röd");
-//		    		speedY = 0.75*speedXY;
-//		    	}
-//		    	if(speedY <= -0.75*speedXY){
-//		    		System.out.println("blå");
-//		    		speedY = -0.75*speedXY;
-//		    	}
-		    	
-		    	
+//	    	Roliga buggar:
+//	    		Har hittat buggar som gör att när bollen träffar översidan
+//	    		så studsar bollen som om den kom i mitten på plattan och
+//	    		när den träffar nerkanten studsar den som om den träffat 
+//	    		överdelen a plattan
 		    }
 		    
 	}
