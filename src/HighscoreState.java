@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-//import org.newdawn.slick.Input;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -14,16 +14,21 @@ import org.newdawn.slick.state.StateBasedGame;
  * @author Philip
  * 
  */
-public class HighscoreState extends BasicGameState{
+public class HighscoreState extends BasicGameState {
 	private int listSize = 20;
 	int stateID = -1;
 	Image background = null;
+	Image backOption = null;
 	ArrayList<String> score = null;
-	
-	public HighscoreState(int stateID){
+	int backY;
+	int backX;
+	float scale = 1;
+	float scaleStep = 0.0001f;
+
+	public HighscoreState(int stateID) {
 		this.stateID = stateID;
 	}
-	
+
 	/**
 	 * Reads the highscore from top to bottom and returns an Array containing
 	 * the scores. Each element in the Array contains the score followed by the
@@ -60,20 +65,19 @@ public class HighscoreState extends BasicGameState{
 		try {
 			File scoreFile = new File("data/highscore.txt");
 			File tempFile = new File("data/highscoretemp.txt");
-			BufferedWriter writer = new BufferedWriter(new FileWriter(
-					tempFile));
-			BufferedReader reader = new BufferedReader(new FileReader(
-					scoreFile));
-			
+			BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+			BufferedReader reader = new BufferedReader(
+					new FileReader(scoreFile));
+
 			String temp = reader.readLine();
 			int writes = 0;
 			boolean notWritten = true;
-			while(temp != null && writes < listSize){
+			while (temp != null && writes < listSize) {
 				String[] temp2 = temp.split(" ");
-				if(Integer.parseInt(temp2[0]) < score && notWritten){
+				if (Integer.parseInt(temp2[0]) < score && notWritten) {
 					if (writes != 0) {
 						writer.newLine();
-						//writes++;
+						// writes++;
 					}
 					writer.write(score + " " + name);
 					writes++;
@@ -81,7 +85,7 @@ public class HighscoreState extends BasicGameState{
 				}
 				if (writes != 0) {
 					writer.newLine();
-					//writes++;
+					// writes++;
 				}
 				writer.write(temp);
 				writes++;
@@ -89,43 +93,70 @@ public class HighscoreState extends BasicGameState{
 			}
 			reader.close();
 			writer.close();
-			
+
 			// Delete the old highscore file.
-			if(!scoreFile.delete()){
+			if (!scoreFile.delete()) {
 				System.err.println("There was a problem deleting a temp file.");
 			}
 			tempFile.renameTo(scoreFile);
 
 		} catch (IOException e) {
 			System.err.println("There was a problem writing to file.");
-		};
+		}
+		;
 	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		background = new Image("data/HighscoreBack.png");
-		
+		Image menuOptions = new Image("data/menuoptions.png");
+		backOption = menuOptions.getSubImage(0, 196, 355, 49);
+		backX = 0;
+		backY = background.getHeight() - backOption.getHeight();
+
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		background.draw(0,0);
-		int posY = 55;
-		for(int i = 0; i < 10; i++){
-			g.drawString("\u001B37;1m" + score.get(i), 100, posY );
-			posY = posY + 10;
+		background.draw(0, 0);
+		backOption.draw(backX, backY, scale);
+		int posY = 155;
+		for (int i = 0; i < score.size(); i++) {
+			g.drawString(i + 1 + "  " + score.get(i), 100, posY);
+			posY = posY + 15;
 		}
-		
+
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int g)
 			throws SlickException {
+		float delta = 1;
+		boolean insideBack = false;
+
+		Input input = gc.getInput();
+
+		int mouseX = input.getMouseX();
+		int mouseY = input.getMouseY();
 		score = this.read();
-		
-		
+		if ((mouseX >= backX && mouseX <= backX + backOption.getWidth())
+				&& (mouseY >= backY && mouseY <= backY + backOption.getHeight())) {
+			insideBack = true;
+		}
+		if (insideBack) {
+			if (scale < 1.05f)
+				scale += scaleStep * delta;
+
+			if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+				sbg.enterState(Main.MAINMENUSTATE);
+			}
+		} else {
+			if (scale > 1.0f)
+				scale -= scaleStep * delta;
+
+		}
 	}
 
 	@Override

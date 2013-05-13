@@ -6,7 +6,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-  
+
 public class GamePlayState extends BasicGameState {
 	private MoveableObject player1;
 	private MoveableObject player2;
@@ -20,28 +20,30 @@ public class GamePlayState extends BasicGameState {
 	public GamePlayState(int stateID) {
 		this.stateID = stateID;
 	}
-	
+
 	@Override
 	public int getID() {
 		return stateID;
 	}
-	
+
 	@Override
-	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		windowSizeX = Pong.screenX();
-		windowSizeY = Pong.screenY();
+	public void init(GameContainer gc, StateBasedGame sbg)
+			throws SlickException {
+		windowSizeX = Main.screenX();
+		windowSizeY = Main.screenY();
 		ball = new PongBall();
 		ball.setPosition(windowSizeX / 2 - ball.object.getWidth() / 2,
 				windowSizeY / 2 - ball.object.getHeight() / 2);
-		//player1 = new AI(ball, windowSizeY, windowSizeX);
+		// player1 = new AI(ball, windowSizeY, windowSizeX);
 		player1 = new Player();
 		player1.setPosition(40, windowSizeY / 2 - player1.object.getHeight()
 				/ 2);
-		
-		if(stateID == 2){
+
+		if (stateID == 2) {
 			System.out.println("Multiplayer initiated");
 			player2 = new Player();
-		}if(stateID == 1){
+		}
+		if (stateID == 1) {
 			System.out.println("Singleplayer initiated");
 			player2 = new AI(ball, windowSizeY, windowSizeX);
 		}
@@ -49,10 +51,11 @@ public class GamePlayState extends BasicGameState {
 				windowSizeY / 2 - player1.object.getHeight() / 2);
 		gc.setShowFPS(false);
 
-    }
-	
+	}
+
 	@Override
-    public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
+			throws SlickException {
 		if (gameOver()) {
 			return;
 		}
@@ -64,18 +67,19 @@ public class GamePlayState extends BasicGameState {
 		g.drawString("X Speed: " + ball.getSpeedX(), 5, 5);
 		g.drawString("Y Speed: " + ball.getSpeedY(), 5, 15);
 		g.drawString("Overall Speed: " + ball.getSpeedXY(), 5, 25);
-    }
-	
+	}
+
 	@Override
-    public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+	public void update(GameContainer gc, StateBasedGame sbg, int delta)
+			throws SlickException {
 		Input input = gc.getInput();
 		ballAction();
 		movePlayers(input);
 		if (player1.getLives() <= 0 || player2.getLives() <= 0) {
 			gameOver = true;
 		}
-    }
-	
+	}
+
 	/**
 	 * Indicates whether the game is over or not. If the game is over it draws a
 	 * message showing which player has won.
@@ -114,22 +118,23 @@ public class GamePlayState extends BasicGameState {
 		} else if (ball.px + ball.object.getWidth() >= windowSizeX) {
 			player2.loseLife();
 			ball.setPosition(windowSizeX / 2, windowSizeY / 2);
-		} else if (ball.py <= 1 || ball.py + ball.object.getHeight() >= windowSizeY - 1) {
+		} else if (ball.py <= 1
+				|| ball.py + ball.object.getHeight() >= windowSizeY - 1) {
 			ball.wallBounce();
 			ball.move(null);
-			
+
 		} else if ((ball.px == player1.px + player1.object.getWidth() && (ball.py
 				+ ball.object.getHeight() >= player1.py && ball.py <= player1.py
 				+ player1.object.getHeight()))) {
 			ball.playerBounce(player1);
 			ball.move(null);
-			
+
 		} else if ((ball.px + ball.object.getWidth() == player2.px && (ball.py
 				+ ball.object.getHeight() >= player2.py && ball.py <= player2.py
 				+ player2.object.getHeight()))) {
 			ball.playerBounce(player2);
 			ball.move(null);
-			
+
 		} else {
 			ball.move(null);
 		}
@@ -175,12 +180,10 @@ public class GamePlayState extends BasicGameState {
 		}
 	}
 
-//	public static void main(String[] args) throws SlickException {
-//		AppGameContainer app = new AppGameContainer(new Main());
-//
-//		app.setDisplayMode(windowSizeX, windowSizeY, false);
-//		app.start();
-//	}
+	// public static void main(String[] args) throws SlickException {
+	// AppGameContainer app = new AppGameContainer(new Main());
+	//
+	// app.setDisplayMode(windowSizeX, windowSizeY, false);
+	// app.start();
+	// }
 }
-
-
