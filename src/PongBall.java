@@ -24,11 +24,23 @@ public class PongBall extends MoveableObject {
 	}
 	
 	public void wallBounce(){
-		speedY = -speedY;
+		speedY = -getSpeedY();
+	}
+	
+	public double getSpeedY() {
+		return speedY;
+	}
+	
+	public double getSpeedX() {
+		return speedX;
+	}
+	
+	public double getSpeedXY() {
+		return speedXY;
 	}
 	
 	public void playerBounce(MoveableObject player){
-		
+			double middle = player.object.getHeight()/4;
 		    double ballLength = this.object.getHeight();
 		    double ballCenterY = this.py + ballLength/2;
 		    double paddleLength = player.object.getHeight();
@@ -40,15 +52,36 @@ public class PongBall extends MoveableObject {
 		    // Calculate the position of the ball relative to the center of
 		    // the paddle, and express this as a number between -1 and 1
 		    double posY = (ballCenterY - paddleCenterY) / (paddleLength/2);
-
-		    speedY = speedXY * posY * influenceY;
-
-		    // The new Y speed will always be nonzero as long as the X speed 
-		    // is less than the original overall speed.
-		    speedX = Math.sqrt(speedXY*speedXY - speedY*speedY) *
-		             (speedX > 0? -1 : 1);
-
-		
+		    
+	    	if(posY < middle){
+	    		speedY = -speedXY * posY * influenceY;	
+	    		speedX = Math.sqrt(speedXY*speedXY - speedY*speedY) *
+			             (speedX > 0? -1 : 1);
+		   	}
+	    	else if(posY > middle){
+	    		speedY = -speedXY * posY * influenceY;
+	    		speedX = Math.sqrt(speedXY*speedXY - speedY*speedY) *
+			             (speedX > 0? -1 : 1);
+		   	}
+//		    speedY = -speedXY * posY * influenceY;
+		    
+		    else {
+		    	speedX = -speedX;
+		    	System.out.println("mitt");
+		    }
+		    	
+//		    	if(speedY >= 0.75*speedXY){
+//		    		System.out.println("röd");
+//		    		speedY = 0.75*speedXY;
+//		    	}
+//		    	if(speedY <= -0.75*speedXY){
+//		    		System.out.println("blå");
+//		    		speedY = -0.75*speedXY;
+//		    	}
+		    	
+		    	
+		    }
+		    
 	}
 
-}
+

@@ -30,6 +30,7 @@ public class Main extends BasicGame {
 		ball = new PongBall();
 		ball.setPosition(windowSizeX / 2 - ball.object.getWidth() / 2,
 				windowSizeY / 2 - ball.object.getHeight() / 2);
+		//player1 = new AI(ball, windowSizeY, windowSizeX);
 		player1 = new Player();
 		player1.setPosition(40, windowSizeY / 2 - player1.object.getHeight()
 				/ 2);
@@ -65,6 +66,9 @@ public class Main extends BasicGame {
 		player2.object.draw(player2.getPositionX(), player2.getPositionY());
 		g.drawString("Lives: Player 1: " + player1.getLives() + " Player 2: "
 				+ player2.getLives(), 5, windowSizeY - 20);
+		g.drawString("X Speed: " + ball.getSpeedX(), 5, 5);
+		g.drawString("Y Speed: " + ball.getSpeedY(), 5, 15);
+		g.drawString("Overall Speed: " + ball.getSpeedXY(), 5, 25);
 
 	}
 
