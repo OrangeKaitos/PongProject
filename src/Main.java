@@ -33,6 +33,7 @@ public class Main extends StateBasedGame {
 		this.addState(new GamePlayState(GAMEMULTISTATE));
 		this.addState(new InstructionState(INSTRUCTIONSTATE));
 		this.addState(new HighscoreState(HIGHSCORESTATE));
+		this.addState(new GameOverState(GAMEOVERSTATE));
 	}
 
 	public static int screenX() {

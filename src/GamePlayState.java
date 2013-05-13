@@ -56,7 +56,7 @@ public class GamePlayState extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		if (gameOver()) {
+		if (gameOver(sbg)) {
 			return;
 		}
 		ball.object.draw(ball.getPositionX(), ball.getPositionY());
@@ -64,9 +64,6 @@ public class GamePlayState extends BasicGameState {
 		player2.object.draw(player2.getPositionX(), player2.getPositionY());
 		g.drawString("Lives: Player 1: " + player1.getLives() + " Player 2: "
 				+ player2.getLives(), 5, windowSizeY - 20);
-		g.drawString("X Speed: " + ball.getSpeedX(), 5, 5);
-		g.drawString("Y Speed: " + ball.getSpeedY(), 5, 15);
-		g.drawString("Overall Speed: " + ball.getSpeedXY(), 5, 25);
 	}
 
 	@Override
@@ -87,16 +84,12 @@ public class GamePlayState extends BasicGameState {
 	 * @return Whether the game is over or not.
 	 * @throws SlickException
 	 */
-	private boolean gameOver() throws SlickException {
+	private boolean gameOver(StateBasedGame stg) throws SlickException {
 		if (!gameOver) {
 			return false;
 		} else {
-			if (player1.getLives() <= 0) { // Draws a message saying player2 has
-											// won.
-				Image gameOverMessage = new Image("data/player2_win.png");
-				gameOverMessage.draw(
-						windowSizeX / 2 - gameOverMessage.getWidth() / 2,
-						windowSizeY / 2 - gameOverMessage.getHeight() / 2);
+			if (player1.getLives() <= 0) { 
+				stg.enterState(Main.GAMEOVERSTATE);
 			} else { // Draws a message saying player1 has won.
 				Image gameOverMessage = new Image("data/player1_win.png");
 				gameOverMessage.draw(

@@ -13,7 +13,7 @@ public abstract class MoveableObject {
 	protected int sx, sy; // the objects size
 	protected float speed = 1f; // the speed of the object
 	protected Image object;
-	protected int lives = 50;
+	protected int lives = 1;
 
 	/**
 	 * Creates a new MoveableObject and sets its position, size and speed.
