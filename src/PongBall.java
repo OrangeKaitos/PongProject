@@ -53,4 +53,5 @@ public class PongBall extends MoveableObject {
 			}
 		}
 	}
+
 }
