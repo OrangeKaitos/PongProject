@@ -1,11 +1,15 @@
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+/**
+ * Class PongBall is a ball in the game pong.
+ * 
+ * @author Philip
+ * 
+ */
 public class PongBall extends MoveableObject {
 	private double speedX = 1f;
 	private double speedY = 1f;
-	// Uses pythagoras to decide overall speed of the ball.
-	private double speedXY = Math.sqrt(speedX * speedX + speedY * speedY);
 
 	public PongBall() throws SlickException {
 		super();
@@ -33,10 +37,6 @@ public class PongBall extends MoveableObject {
 
 	public double getSpeedX() {
 		return speedX;
-	}
-
-	public double getSpeedXY() {
-		return speedXY;
 	}
 
 	public void playerBounce(MoveableObject player) {

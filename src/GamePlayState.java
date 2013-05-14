@@ -1,4 +1,3 @@
-//import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -7,6 +6,13 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * Class GamePlayState is the state in the game where the actual game is being
+ * played.
+ * 
+ * @author Philip Stiff and Samuel Philipson
+ * 
+ */
 public class GamePlayState extends BasicGameState {
 	private MoveableObject player1;
 	private MoveableObject player2;
@@ -56,7 +62,7 @@ public class GamePlayState extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
-		if (gameOver(sbg)) {
+		if (gameOver(sbg, gc)) {
 			return;
 		}
 		ball.object.draw(ball.getPositionX(), ball.getPositionY());
@@ -84,12 +90,13 @@ public class GamePlayState extends BasicGameState {
 	 * @return Whether the game is over or not.
 	 * @throws SlickException
 	 */
-	private boolean gameOver(StateBasedGame stg) throws SlickException {
+	private boolean gameOver(StateBasedGame sbg, GameContainer gc)
+			throws SlickException {
 		if (!gameOver) {
 			return false;
 		} else {
-			if (player1.getLives() <= 0) { 
-				stg.enterState(Main.GAMEOVERSTATE);
+			if (player1.getLives() <= 0) {
+				sbg.enterState(Main.GAMEOVERSTATE);
 			} else { // Draws a message saying player1 has won.
 				Image gameOverMessage = new Image("data/player1_win.png");
 				gameOverMessage.draw(
@@ -172,11 +179,4 @@ public class GamePlayState extends BasicGameState {
 			player2.move(null);
 		}
 	}
-
-	// public static void main(String[] args) throws SlickException {
-	// AppGameContainer app = new AppGameContainer(new Main());
-	//
-	// app.setDisplayMode(windowSizeX, windowSizeY, false);
-	// app.start();
-	// }
 }

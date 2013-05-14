@@ -10,9 +10,9 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 /**
- * Class Menu is a menu for the game .
+ * Class Menu is a menu for the game.
  * 
- * @author Philip Stiff
+ * @author Samuel Philipson
  * 
  */
 public class MainMenuState extends BasicGameState {
@@ -105,6 +105,7 @@ public class MainMenuState extends BasicGameState {
 				startSingleScale += scaleStep * delta;
 
 			if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+				Main.timeSinglePlayGameStarted = System.currentTimeMillis();
 				sbg.enterState(Main.GAMESINGLESTATE);
 			}
 		} else {
