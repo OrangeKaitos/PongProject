@@ -6,6 +6,12 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * Class InstructionState is the state of a game displaying instructions.
+ * 
+ * @author Samuel Philipson
+ * 
+ */
 public class InstructionState extends BasicGameState {
 	Image background = null;
 	Image backOption = null;

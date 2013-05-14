@@ -6,15 +6,14 @@ import org.newdawn.slick.SlickException;
  * The pad has a position, a size and a speed of which it moves when moved.
  * 
  * @author Philip Stiff
- * @version 2013-05-01
  * 
  */
 public class Player extends MoveableObject {
-	
+
 	/**
 	 * Creates a Player.
 	 * 
-	 * @throws SlickException 
+	 * @throws SlickException
 	 */
 	public Player() throws SlickException {
 		super();
@@ -28,12 +27,12 @@ public class Player extends MoveableObject {
 	 */
 	@Override
 	public void move(String direction) {
-		if (direction.equals("up")){
+		if (direction.equals("up")) {
 			py -= speed;
 		}
-		if (direction.equals("down")){
+		if (direction.equals("down")) {
 			py += speed;
 		}
 	}
-	
+
 }

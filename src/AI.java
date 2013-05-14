@@ -5,7 +5,6 @@ import org.newdawn.slick.SlickException;
  * Class AI symbolizes a players "pad" in the game Pong played by the computer.
  * 
  * @author Philip Stiff
- * @version 2013-05-01
  * 
  */
 public class AI extends MoveableObject {

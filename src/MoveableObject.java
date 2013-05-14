@@ -6,14 +6,13 @@ import org.newdawn.slick.*;
  * move-method.
  * 
  * @author Philip Stiff
- * @version 2013-05-01
  */
 public abstract class MoveableObject {
 	protected int px = 0, py = 0; // the objects position
 	protected int sx, sy; // the objects size
 	protected float speed = 1f; // the speed of the object
 	protected Image object;
-	protected int lives = 50;
+	protected int lives = 1;
 
 	/**
 	 * Creates a new MoveableObject and sets its position, size and speed.
@@ -24,8 +23,8 @@ public abstract class MoveableObject {
 	 *            The objects positions y coordinate.
 	 * @throws SlickException
 	 */
-	public MoveableObject(){
-		
+	public MoveableObject() {
+
 	}
 
 	/**
@@ -37,7 +36,9 @@ public abstract class MoveableObject {
 
 	/**
 	 * Sets the image of the object.
-	 * @param object The new image.
+	 * 
+	 * @param object
+	 *            The new image.
 	 */
 	public void setObject(Image object) {
 		this.object = object;
@@ -114,19 +115,19 @@ public abstract class MoveableObject {
 	public Image getImage() {
 		return object;
 	}
-	
+
 	/**
 	 * Decreases the life's by one.
 	 */
-	public boolean loseLife(){
+	public boolean loseLife() {
 		lives--;
 		return lives == 0;
 	}
-	
+
 	/**
 	 * @return The number of lives the player has left.
 	 */
-	public int getLives(){
+	public int getLives() {
 		return lives;
 	}
 }

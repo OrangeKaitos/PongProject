@@ -3,6 +3,13 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * Class main manages different states of a game.
+ * 
+ * @author Samuel Philipson and Philip Stiff
+ * 
+ */
+
 public class Main extends StateBasedGame {
 
 	public static final int MAINMENUSTATE = 0;
@@ -13,6 +20,8 @@ public class Main extends StateBasedGame {
 	public static final int HIGHSCORESTATE = 5;
 	public static final int screenX = 800;
 	public static final int screenY = 600;
+	public static long timeSinglePlayGameStarted = -1;
+	public static final int HIGHSCORE_SIZE = 20;
 
 	public Main() {
 		super("Pong");
@@ -33,6 +42,7 @@ public class Main extends StateBasedGame {
 		this.addState(new GamePlayState(GAMEMULTISTATE));
 		this.addState(new InstructionState(INSTRUCTIONSTATE));
 		this.addState(new HighscoreState(HIGHSCORESTATE));
+		this.addState(new GameOverState(GAMEOVERSTATE));
 	}
 
 	public static int screenX() {
@@ -41,6 +51,24 @@ public class Main extends StateBasedGame {
 
 	public static int screenY() {
 		return screenY;
+	}
+
+	/**
+	 * Set the time when a single play game was started.
+	 * 
+	 * @param time
+	 *            The time when the game was started.
+	 */
+	public void setTimeSinglePlayGameStarted(long time) {
+		timeSinglePlayGameStarted = time;
+	}
+
+	/**
+	 * @return The time a single play game started, or -1 if no single play game
+	 *         has been started.
+	 */
+	public long getTimeSinglePlayGameStarted() {
+		return timeSinglePlayGameStarted;
 	}
 
 }

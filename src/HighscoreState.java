@@ -1,4 +1,3 @@
-import java.io.*;
 import java.util.ArrayList;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -9,21 +8,22 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * Class Highscore is a class used to read and write a highscore in a file.
+ * Class HighscoreState is a state in the game reading and displaying a
+ * highscore from a file.
  * 
- * @author Philip
+ * @author Philip Stiff and Samuel Philipson
  * 
  */
 public class HighscoreState extends BasicGameState {
+
 	private int listSize = 20;
-	int stateID = -1;
-	Image background = null;
-	Image backOption = null;
-	ArrayList<String> score = null;
+	private Highscore highscore;
+	private ArrayList<String> score = null;
 	int backY;
 	int backX;
 	float scale = 1;
 	float scaleStep = 0.0001f;
+
 
 	public HighscoreState(int stateID) {
 		this.stateID = stateID;
@@ -104,11 +104,16 @@ public class HighscoreState extends BasicGameState {
 			System.err.println("There was a problem writing to file.");
 		}
 		;
+
+
+	public HighscoreState(int stateID) {
+		this.stateID = stateID;
 	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
+		highscore = new Highscore(Main.HIGHSCORE_SIZE);
 		background = new Image("data/HighscoreBack.png");
 		Image menuOptions = new Image("data/menuoptions.png");
 		backOption = menuOptions.getSubImage(0, 196, 355, 49);
@@ -125,6 +130,7 @@ public class HighscoreState extends BasicGameState {
 		int posY = 155;
 		for (int i = 0; i < score.size(); i++) {
 			g.drawString(i + 1 + "  " + score.get(i), 100, posY);
+			g.drawString(i + 1 + ".  " + score.get(i), 100, posY);
 			posY = posY + 15;
 		}
 
@@ -140,7 +146,7 @@ public class HighscoreState extends BasicGameState {
 
 		int mouseX = input.getMouseX();
 		int mouseY = input.getMouseY();
-		score = this.read();
+		score = highscore.read();
 		if ((mouseX >= backX && mouseX <= backX + backOption.getWidth())
 				&& (mouseY >= backY && mouseY <= backY + backOption.getHeight())) {
 			insideBack = true;
