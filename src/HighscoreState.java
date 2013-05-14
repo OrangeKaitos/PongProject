@@ -8,7 +8,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * Class HighscoreState is a state in the game reading and displaying a
+ * Class HighscoreState is a state in the game reading and displaying the
  * highscore from a file.
  * 
  * @author Philip Stiff and Samuel Philipson
